@@ -70,7 +70,10 @@ export class RegisterComponent implements OnInit {
     this.dateCadastro.setValue(new Date());
     this.contactsService.save(this.registerForm.getRawValue());
     alert(`${this.nome.value} foi salvo com sucesso!`);
+
     this.registerForm.reset();
+    this.ativo.setValue(true);
+    this.favorito.setValue(false);
   }
 
   get nome() {
@@ -87,5 +90,11 @@ export class RegisterComponent implements OnInit {
   }
   get dateCadastro() {
     return this.registerForm.controls['dateCadastro'];
+  }
+  get ativo() {
+    return this.registerForm.controls['ativo'];
+  }
+  get favorito() {
+    return this.registerForm.controls['favorito'];
   }
 }

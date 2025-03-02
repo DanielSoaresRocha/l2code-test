@@ -53,6 +53,9 @@
         &:last-child td {
           border: 0;
         }
+        &.inactive-contact {
+          text-decoration: line-through;
+        }
       }
     }
   }

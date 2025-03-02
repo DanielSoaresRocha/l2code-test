@@ -16,34 +16,55 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let contact of contacts">
-          <td>{{ contact.nome }}</td>
-          <td>{{ contact.email }}</td>
-          <td>{{ contact.celular | phoneNumber }}</td>
-          <td>{{ contact.telefone | phoneNumber }}</td>
-          <td>{{ contact.dateCadastro | formatDate }}</td>
-          <td>
-            <i class="las la-edit" style="color: blue"></i>
-            @if(!contact.favorito){
-            <i
-              class="las la-star"
-              (click)="favoriteContact(contact)"
-              style="color: #bebe25"
-            ></i>
-            }@else {
-            <i
-              class="lar la-star"
-              (click)="favoriteContact(contact)"
-              style="color: #bebe25"
-            ></i>
-            }
-            <i
-              class="las la-trash"
-              style="color: red"
-              (click)="deleteContact(contact)"
-            ></i>
-          </td>
-        </tr>
+        <ng-container *ngFor="let contact of contacts">
+          <tr [ngClass]="{ 'inactive-contact': !contact.ativo }">
+            <td>
+              {{ contact.nome }}
+            </td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.celular | phoneNumber }}</td>
+            <td>{{ contact.telefone | phoneNumber }}</td>
+            <td>{{ contact.dateCadastro | formatDate }}</td>
+            <td>
+              <i class="las la-edit" style="color: blue" title="Editar"></i>
+              @if(contact.favorito){
+              <i
+                class="las la-star"
+                (click)="favoriteContact(contact)"
+                style="color: #bebe25"
+                title="Desfavoritar"
+              ></i>
+              }@else {
+              <i
+                class="lar la-star"
+                (click)="favoriteContact(contact)"
+                style="color: #bebe25"
+                title="Favoritar"
+              ></i>
+              } @if(contact.ativo){
+              <i
+                class="las la-stop-circle"
+                style="color: orange"
+                (click)="inactiveContact(contact)"
+                title="Inativar"
+              ></i>
+              }@else {
+              <i
+                class="las la-plus-circle"
+                style="color: green"
+                (click)="inactiveContact(contact)"
+                title="Ativar"
+              ></i>
+              }
+              <i
+                class="las la-trash"
+                style="color: red"
+                (click)="deleteContact(contact)"
+                title="Excluir"
+              ></i>
+            </td>
+          </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>

@@ -34,4 +34,14 @@ export class SearchComponent implements OnInit {
     this.contactService.update(contact);
     this.contacts = this.contactService.getData();
   }
+
+  inactiveContact(contact: Contact) {
+    contact = {
+      ...contact,
+      ativo: !contact.ativo,
+    };
+
+    this.contactService.update(contact);
+    this.contacts = this.contactService.getData();
+  }
 }
