@@ -1,0 +1,18 @@
+<nav class="c-sidebar show" [ngClass]="{ show: showSideBar }">
+  <ul>
+    <li
+      [ngClass]="{ 'is-active': activeView == 1 }"
+      (click)="changeView(1, 'register')"
+    >
+      <i class="las la-id-card"></i>
+      <a>Cadastrar</a>
+    </li>
+    <li
+      [ngClass]="{ 'is-active': activeView == 2 }"
+      (click)="changeView(2, 'search')"
+    >
+      <i class="las la-search"></i>
+      <a>Consultar</a>
+    </li>
+  </ul>
+</nav>

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { LayoutComponent } from './shared/components/layout';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,12 @@ export const routes: Routes = [
   },
   {
     path: 'contacts',
-    loadChildren: () => import('./modules/contacts/contacts-routing'),
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./modules/contacts/contacts-routing'),
+      },
+    ],
   },
 ];

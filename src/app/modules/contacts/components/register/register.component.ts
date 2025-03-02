@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { PhoneNumberPipe } from '../../../../shared/phone-number.pipe';
+import { PhoneNumberPipe } from '../../../../shared/pipe/phone-number.pipe';
 import { ContactsService } from '../../services/contacts.service';
 
 @Component({

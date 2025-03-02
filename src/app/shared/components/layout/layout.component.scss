@@ -1,0 +1,14 @@
+@import "../../../../sass/abstracts/mixins";
+
+section {
+  display: flex;
+  min-height: 90vh;
+  main {
+    width: 100%;
+    padding: 3rem;
+    background-color: #f7f8f9;
+    @include mobile-down {
+      padding: 1rem;
+    }
+  }
+}
