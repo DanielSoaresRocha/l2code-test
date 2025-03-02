@@ -1,1 +1,50 @@
-<p>register works!</p>
+<div class="register-container">
+  <form [formGroup]="registerForm">
+    <div class="row" style="row-gap: 20px">
+      <div class="col-12">
+        <label>Nome:</label>
+        <input formControlName="nome" />
+      </div>
+      <div class="col-12 form-error" *ngIf="nome.invalid && nome.touched">
+        <label>Campo obrigatório</label>
+      </div>
+      <div class="col-12">
+        <label>Email:</label>
+        <input formControlName="email" />
+      </div>
+      <div class="col-12 form-error" *ngIf="email.invalid && email.touched">
+        <label>Campo obrigatório</label>
+      </div>
+      <div class="col-12">
+        <label>Celular:</label>
+        <input
+          mask="(00) 00000-0000"
+          placeholder="(99) 99999-9999"
+          formControlName="celular"
+        />
+      </div>
+      <div class="col-12 form-error" *ngIf="celular.invalid && celular.touched">
+        <label>Celular inválido! Insira no formato correto.</label>
+      </div>
+      <div class="col-12">
+        <label>Telefone:</label>
+        <input
+          formControlName="telefone"
+          mask="(00) 00000-0000"
+          placeholder="(99) 99999-9999"
+        />
+      </div>
+      <div
+        class="col-12 form-error"
+        *ngIf="telefone.invalid && telefone.touched"
+      >
+        <label>Telefone inválido! Insira no formato correto.</label>
+      </div>
+
+      <div class="col-12">
+        <button (click)="save()">Salvar</button>
+      </div>
+    </div>
+  </form>
+  {{ getContacts() | json }}
+</div>
