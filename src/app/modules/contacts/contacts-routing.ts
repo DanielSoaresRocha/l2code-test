@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { RegisterComponent } from './components';
+import { RegisterComponent, SearchComponent } from './components';
 
 export default [
   {
@@ -12,7 +12,7 @@ export default [
     component: RegisterComponent,
   },
   {
-    path: 'update',
-    component: RegisterComponent,
+    path: 'search',
+    component: SearchComponent,
   },
 ] as Routes;

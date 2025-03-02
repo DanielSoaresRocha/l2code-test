@@ -67,6 +67,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    this.dateCadastro.setValue(new Date());
     this.contactsService.save(this.registerForm.getRawValue());
     alert(`${this.nome.value} foi salvo com sucesso!`);
     this.registerForm.reset();
@@ -83,5 +84,8 @@ export class RegisterComponent implements OnInit {
   }
   get telefone() {
     return this.registerForm.controls['telefone'];
+  }
+  get dateCadastro() {
+    return this.registerForm.controls['dateCadastro'];
   }
 }

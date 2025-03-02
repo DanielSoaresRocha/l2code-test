@@ -1,0 +1,50 @@
+<div class="table">
+  <div class="table__title">
+    <h3>Contatos</h3>
+    <button class="is-sucess">Adicionar</button>
+  </div>
+  <div class="table__content">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Celular</th>
+          <th>Telefone</th>
+          <th>Cadastro</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of contacts">
+          <td>{{ contact.nome }}</td>
+          <td>{{ contact.email }}</td>
+          <td>{{ contact.celular | phoneNumber }}</td>
+          <td>{{ contact.telefone | phoneNumber }}</td>
+          <td>{{ contact.dateCadastro | formatDate }}</td>
+          <td>
+            <i class="las la-edit" style="color: blue"></i>
+            @if(!contact.favorito){
+            <i
+              class="las la-star"
+              (click)="favoriteContact(contact)"
+              style="color: #bebe25"
+            ></i>
+            }@else {
+            <i
+              class="lar la-star"
+              (click)="favoriteContact(contact)"
+              style="color: #bebe25"
+            ></i>
+            }
+            <i
+              class="las la-trash"
+              style="color: red"
+              (click)="deleteContact(contact)"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
