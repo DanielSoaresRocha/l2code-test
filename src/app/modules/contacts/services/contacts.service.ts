@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Contact } from '../model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class ContactsService {
     localStorage.setItem(this.storageKey, JSON.stringify(dados));
   }
 
-  getData(): any[] {
+  getData(): Contact[] {
     const dados = localStorage.getItem(this.storageKey);
     return dados ? JSON.parse(dados) : [];
   }

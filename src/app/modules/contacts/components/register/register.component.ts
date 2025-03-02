@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { PhoneNumberPipe } from '../../../../shared/phone-number.pipe';
 import { ContactsService } from '../../services/contacts.service';
 
 @Component({
@@ -15,12 +16,15 @@ import { ContactsService } from '../../services/contacts.service';
   imports: [FormsModule, ReactiveFormsModule, CommonModule, NgxMaskDirective],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
-  providers: [provideNgxMask()],
+  providers: [provideNgxMask(), PhoneNumberPipe],
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
 
-  constructor(private contactsService: ContactsService) {}
+  constructor(
+    private contactsService: ContactsService,
+    private phoneNumberPipe: PhoneNumberPipe
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
@@ -49,13 +53,23 @@ export class RegisterComponent implements OnInit {
       alert('Preencha corretamente o formulário');
       return;
     }
+
+    if (
+      this.contactsService
+        .getData()
+        .find((contact) => contact.celular == this.celular.value)
+    ) {
+      alert(
+        `O número de celular ${this.phoneNumberPipe.transform(
+          this.celular.value
+        )} já foi adicionado.`
+      );
+      return;
+    }
+
     this.contactsService.save(this.registerForm.getRawValue());
     alert(`${this.nome.value} foi salvo com sucesso!`);
     this.registerForm.reset();
-  }
-
-  getContacts() {
-    return this.contactsService.getData();
   }
 
   get nome() {
