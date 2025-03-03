@@ -4,7 +4,8 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'formatDate',
 })
 export class FormateDatePipe implements PipeTransform {
-  transform(value: Date): unknown {
-    return new Date(value).toLocaleDateString('pt-br');
+  transform(date: Date): unknown {
+    if (date) return new Date(date).toLocaleDateString('pt-br');
+    return undefined;
   }
 }

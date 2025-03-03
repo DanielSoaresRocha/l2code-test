@@ -1,23 +1,25 @@
 @import "../abstracts/variables";
 
-input,
-textarea,
-select {
-  border-radius: 8px;
-  padding: 10px;
-  transition: all 0.3sease-in-out;
-  border: 1px solid black;
+.col-12 {
+  input,
+  textarea,
+  select {
+    border-radius: 8px;
+    padding: 10px;
+    transition: all 0.3sease-in-out;
+    border: 1px solid black;
 
-  /* Foco no input */
-  &:focus {
-    outline: none;
-    border-color: $segundary;
-    box-shadow: 0 0 5px rgba(0, 129, 199, 0.5);
-  }
+    /* Foco no input */
+    &:focus {
+      outline: none;
+      border-color: $segundary;
+      box-shadow: 0 0 5px rgba(0, 129, 199, 0.5);
+    }
 
-  /* Hover nos inputs */
-  &:hover {
-    border-color: $segundary;
-    box-shadow: 0 0 5px rgba(0, 129, 199, 0.5);
+    /* Hover nos inputs */
+    &:hover {
+      border-color: $segundary;
+      box-shadow: 0 0 5px rgba(0, 129, 199, 0.5);
+    }
   }
 }
