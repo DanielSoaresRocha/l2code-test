@@ -1,6 +1,18 @@
+@import "../../../../../sass/abstracts/variables";
+
+$azul-claro: #319bd7;
+$verde-escuro: #2ecc71;
+$laranja: #f39c12;
+
+.filter {
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
 button {
   border: 2px solid #2ecc71;
-  background: #1abc9c;
+  background: $primary;
   color: white;
   width: 160px;
   border-radius: 6px;
@@ -8,6 +20,6 @@ button {
   font-weight: bold;
   &:hover {
     border: 2px solid #2ecc71;
-    background: #1abc9c;
+    background: $primary;
   }
 }

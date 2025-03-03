@@ -1,3 +1,5 @@
+@import "../../../../../sass/abstracts/variables";
+
 .c-container {
   display: flex;
   align-items: center;
@@ -25,7 +27,7 @@
     z-index: 1;
     width: 34rem;
     height: 24rem;
-    background: linear-gradient(147.74deg, #1abc9c 17.22%, #2ecc71 65.94%);
+    background: linear-gradient(147.74deg, $primary 17.22%, #2ecc71 65.94%);
     box-shadow: 12px 16px 20px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     > img {

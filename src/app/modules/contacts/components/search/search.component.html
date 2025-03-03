@@ -1,8 +1,61 @@
-<div class="table">
+<div class="filter p-4">
+  <h6>Filtros:</h6>
+  <form [formGroup]="filterForm">
+    <div class="row">
+      <div class="col-12 col-sm-3 d-flex flex-column">
+        <label>Nome:</label>
+        <input formControlName="nome" />
+      </div>
+      <div class="col-12 col-sm-3 d-flex flex-column">
+        <label>Email:</label>
+        <input formControlName="email" />
+      </div>
+      <div class="col-12 col-sm-3 d-flex flex-column">
+        <label>Celular:</label>
+        <input
+          mask="(00) 00000-0000"
+          placeholder="(99) 99999-9999"
+          formControlName="celular"
+        />
+      </div>
+      <div class="col-12 col-sm-3 d-flex flex-column">
+        <label>Telefone:</label>
+        <input
+          formControlName="telefone"
+          mask="(00) 00000-0000"
+          placeholder="(99) 99999-9999"
+        />
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6 col-sm-3 d-flex flex-column">
+        <label>Apenas Favorito:</label>
+        <ui-switch formControlName="favorito"></ui-switch>
+      </div>
+      <div class="col-6 col-sm-3 d-flex flex-column">
+        <label>Apenas Inativos:</label>
+        <ui-switch formControlName="ativo"></ui-switch>
+      </div>
+    </div>
+    <div class="row justify-content-end">
+      <div class="col-3 d-flex justify-content-end">
+        <button
+          style="background: #f39c12; border: 2px solid #f39c12"
+          (click)="filter()"
+        >
+          buscar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="table mt-4">
   <div class="table__title">
     <h3>Contatos</h3>
     <button (click)="goToRegister()">Adicionar</button>
   </div>
+
   <div class="table__content">
     <table>
       <thead>
@@ -16,7 +69,7 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let contact of contacts">
+        <ng-container *ngFor="let contact of contactsFilter">
           <tr [ngClass]="{ 'inactive-contact': !contact.ativo }">
             <td>
               {{ contact.nome }}

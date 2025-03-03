@@ -8,7 +8,7 @@
   height: 10vh;
   filter: drop-shadow(0px 4px 7px rgba(0, 0, 0, 0.43));
   //background: linear-gradient(294.03deg, #eb856a 15.45%, #c85a3e 56.62%);
-  background: linear-gradient(294.03deg, #2ecc71 15.45%, #1abc9c 56.62%);
+  background: linear-gradient(294.03deg, #2ecc71 15.45%, $primary 56.62%);
   &__menu {
     display: flex;
     align-items: center;

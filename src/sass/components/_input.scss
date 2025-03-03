@@ -1,0 +1,21 @@
+input,
+textarea,
+select {
+  border-radius: 8px;
+  padding: 10px;
+  transition: all 0.3sease-in-out;
+  border: 1px solid black;
+
+  /* Foco no input */
+  &:focus {
+    outline: none;
+    border-color: #2ecc71;
+    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+  }
+
+  /* Hover nos inputs */
+  &:hover {
+    border-color: #2ecc71;
+    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+  }
+}
