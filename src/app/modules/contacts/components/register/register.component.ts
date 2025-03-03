@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { PhoneNumberPipe } from '../../../../shared/pipe/phone-number.pipe';
 import { ContactsService } from '../../services/contacts.service';
@@ -20,14 +21,39 @@ import { ContactsService } from '../../services/contacts.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
+  phoneNumber = '';
 
   constructor(
     private contactsService: ContactsService,
-    private phoneNumberPipe: PhoneNumberPipe
-  ) {}
+    private phoneNumberPipe: PhoneNumberPipe,
+    private route: ActivatedRoute
+  ) {
+    const number = this.route.snapshot.queryParamMap.get('phoneNumber');
+    this.phoneNumber = number ? number : '';
+    console.log('Query Param:', this.phoneNumber);
+  }
 
   ngOnInit(): void {
     this.createForm();
+    if (this.phoneNumber) {
+      this.getContactByPhoneNumber(Number(this.phoneNumber));
+    }
+  }
+
+  getContactByPhoneNumber(phoneNumber: number) {
+    let contact = this.contactsService
+      .getData()
+      .find((c) => c.celular == phoneNumber);
+
+    if (!contact) return;
+
+    this.nome.setValue(contact.nome);
+    this.email.setValue(contact.email);
+    this.celular.setValue(contact.celular);
+    this.telefone.setValue(contact.telefone);
+    this.dateCadastro.setValue(contact.dateCadastro);
+    this.favorito.setValue(contact.favorito);
+    this.ativo.setValue(contact.ativo);
   }
 
   createForm() {
@@ -55,6 +81,7 @@ export class RegisterComponent implements OnInit {
     }
 
     if (
+      !this.phoneNumber &&
       this.contactsService
         .getData()
         .find((contact) => contact.celular == this.celular.value)
@@ -67,15 +94,23 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this.dateCadastro.setValue(new Date());
-    this.contactsService.save(this.registerForm.getRawValue());
+    if (this.phoneNumber) {
+      this.contactsService.update(this.registerForm.getRawValue());
+    } else {
+      this.dateCadastro.setValue(new Date());
+      this.contactsService.save(this.registerForm.getRawValue());
+    }
     alert(`${this.nome.value} foi salvo com sucesso!`);
 
+    this.reset();
+  }
+
+  reset() {
     this.registerForm.reset();
     this.ativo.setValue(true);
     this.favorito.setValue(false);
+    this.phoneNumber = '';
   }
-
   get nome() {
     return this.registerForm.controls['nome'];
   }

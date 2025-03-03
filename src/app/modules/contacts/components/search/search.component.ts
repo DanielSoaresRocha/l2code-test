@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormateDatePipe } from '../../../../shared/pipe/formate-date.pipe';
 import { PhoneNumberPipe } from '../../../../shared/pipe/phone-number.pipe';
 import { Contact } from '../../model';
@@ -14,7 +15,10 @@ import { ContactsService } from '../../services/contacts.service';
 export class SearchComponent implements OnInit {
   contacts!: Contact[];
 
-  constructor(private contactService: ContactsService) {}
+  constructor(
+    private contactService: ContactsService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.contacts = this.contactService.getData();
@@ -43,5 +47,11 @@ export class SearchComponent implements OnInit {
 
     this.contactService.update(contact);
     this.contacts = this.contactService.getData();
+  }
+
+  updateContact(phoneNumber: number) {
+    this.router.navigate(['contacts/register'], {
+      queryParams: { phoneNumber: phoneNumber },
+    });
   }
 }

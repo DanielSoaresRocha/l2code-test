@@ -40,10 +40,23 @@
       >
         <label>Telefone inválido! Insira no formato correto.</label>
       </div>
-
-      <div class="col-12">
-        <button (click)="save()">Salvar</button>
+    </div>
+    <div class="row mt-4">
+      <div
+        class="d-flex justify-content-center"
+        [ngClass]="phoneNumber ? 'col-6' : 'col-12'"
+      >
+        <button (click)="save()">
+          {{ phoneNumber ? "Alterar" : "Salvar" }}
+        </button>
       </div>
+      @if (phoneNumber) {
+      <div class="col-6 d-flex justify-content-center">
+        <button (click)="reset()" style="background-color: rgb(202 27 27)">
+          Cancelar
+        </button>
+      </div>
+      }
     </div>
   </form>
 </div>

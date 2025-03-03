@@ -26,7 +26,12 @@
             <td>{{ contact.telefone | phoneNumber }}</td>
             <td>{{ contact.dateCadastro | formatDate }}</td>
             <td>
-              <i class="las la-edit" style="color: blue" title="Editar"></i>
+              <i
+                class="las la-edit"
+                style="color: blue"
+                title="Editar"
+                (click)="updateContact(contact.celular)"
+              ></i>
               @if(contact.favorito){
               <i
                 class="las la-star"
