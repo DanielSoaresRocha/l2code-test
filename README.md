@@ -1,59 +1,135 @@
-# TelephoneScheduling
+# Sistema de Agendamento Telefônico
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+## Visão Geral
 
-## Development server
+Este projeto é uma implementação de um sistema de agendamento telefônico desenvolvido em **Angular**. O objetivo principal é permitir o cadastro, consulta, edição e inativação de contatos, além de possibilitar a marcação de contatos favoritos. O projeto foi estruturado de forma organizada, utilizando boas práticas de desenvolvimento e garantindo segurança nas rotas por meio de **Guards**.
 
-To start a local development server, run:
+<p align="center">
+  <img src="public/assets/readme/img1.png" width="90%" float="center" style="border-radius: 8px"/>
+</p>
 
-```bash
-ng serve
+## Tecnologias Utilizadas
+
+- **Angular 19.2.0** (versão mais recente)
+- **TypeScript**
+- **Bootstrap 5.3.3** (para estilização e responsividade)
+- **ngx-ui-switch 15.0.0** (para componente switch - Implementação de contatos Favoritos e Ativos)
+- **ngx-mask 19.0.6** (para máscaras)
+- **Angular Router** (para navegação entre páginas)
+- **Guards** (para proteção de rotas)
+- **Angular Testing (Jasmine/Karma)** (para testes unitários)
+
+## Funcionalidades
+
+### 1. Tela de Cadastro de Contatos
+
+- Formulário para cadastrar um novo contato.
+- Validação para verificar se o número de celular já foi cadastrado.
+- Mensagens de erro e feedback para o usuário.
+
+<p align="center">
+  <img src="public/assets/readme/img2.png" width="90%" float="center" style="border-radius: 8px"/>
+</p>
+
+### 2. Tela de Consulta de Contatos
+
+- Campo de busca para encontrar contatos rapidamente.
+- Exibição da lista de contatos cadastrados.
+- Indicação visual para contatos favoritos.
+
+<p align="center">
+  <img src="public/assets/readme/img3.png" width="90%" float="center" style="border-radius: 8px"/>
+</p>
+
+### 3. Atualização e Inativação de Contatos
+
+- Possibilidade de editar informações de um contato existente.
+- Opção para inativar contatos, impedindo sua utilização sem excluí-los permanentemente.
+- Filtro para exibir ou ocultar contatos inativos.
+
+### 4. Favoritos
+
+- Opção para marcar/desmarcar um contato como favorito.
+- Destaque visual para contatos favoritos.
+
+<p align="center">
+  <img src="public/assets/readme/img5.png" width="90%" float="center" style="border-radius: 8px"/>
+</p>
+
+## Estrutura do Projeto
+
+O projeto segue uma estrutura modular para facilitar a manutenção e escalabilidade:
+
+```
+├── src
+│   ├── app
+│   │   ├── modules
+│   │   │   ├── contacts (módulo de contatos)
+│   │   │   ├── login (módulo de autenticação)
+│   │   ├── app-route.ts
+│   │   ├── app.component.ts
+│   |   ├── shared (recursos reutilizáveis)
+│   ├── environments (configuração de ambientes)
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Proteção de Rotas
 
-## Code scaffolding
+- Implementação de **Guards** para restringir acesso a determinadas páginas.
+- Utilização de **AuthGuard** para verificar permissões antes da navegação.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Testes Unitários
 
-```bash
-ng generate component component-name
+Foram implementados testes unitários com **Jasmine e Karma**.
+
+<p align="center">
+  <img src="public/assets/readme/img4.png" width="90%" float="center" style="border-radius: 8px"/>
+</p>
+
+## Como Executar o Projeto
+
+### 1. Clonar o Repositório
+
+```
+git clone https://github.com/DanielSoaresRocha/l2code-test.git
+cd telephone-scheduling
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 2. Instalar Dependências
 
-```bash
-ng generate --help
+```
+npm install
 ```
 
-## Building
+### 3. Executar o Servidor
 
-To build the project run:
-
-```bash
-ng build
+```
+npm run start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+A aplicação estará disponível em `http://localhost:4200/`.
 
-## Running unit tests
+### 4. Rodar Testes Unitários
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```
+npm test
 ```
 
-## Running end-to-end tests
+## Considerações Finais
 
-For end-to-end (e2e) testing, run:
+Este projeto foi desenvolvido seguindo boas práticas de desenvolvimento, garantindo um código limpo, organizado e seguro. A implementação de testes unitários reforça a confiabilidade do sistema, e a utilização de **Guards** assegura a proteção das rotas.
 
-```bash
-ng e2e
-```
+Para sugestões, melhorias ou colaboração no projeto, fique à vontade para abrir um Pull Request ou entrar em contato.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## License 📝
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](LICENSE) file for details.
+
+## Autor
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/DanielSoaresRocha"><img src="https://avatars0.githubusercontent.com/u/43214747?s=400&u=a267d113c5469b84bf87d202cdb7129330e4c865&v=4" width="100px;" alt="Daniel Soares"/><br /><sub><b>Daniel Soares</b></sub></a><br /><a href="https://github.com/DanielSoaresRocha/ESIG-challenge/commits?author=DanielSoaresRocha" title="Code">💻</a></td>
+  <tr>
+</table>
