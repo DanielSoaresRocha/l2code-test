@@ -54,4 +54,8 @@ export class SearchComponent implements OnInit {
       queryParams: { phoneNumber: phoneNumber },
     });
   }
+
+  goToRegister() {
+    this.router.navigate(['contacts/register']);
+  }
 }

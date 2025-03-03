@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LayoutComponent } from './shared/components/layout';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,7 @@ export const routes: Routes = [
   {
     path: 'contacts',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',

@@ -1,0 +1,68 @@
+.c-form-group {
+  &__input {
+    display: flex;
+    position: relative;
+    i {
+      color: #2c3e50;
+      font-size: 30px;
+    }
+    label {
+      position: absolute;
+      top: 50%;
+      left: 44px;
+      transform: translateY(-50%);
+      transition: 0.6s;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+    input {
+      border: none;
+      background: transparent;
+      outline: none;
+      margin-left: 14px;
+      padding: 0;
+      font-size: 20px;
+      z-index: 1;
+      &:focus + label,
+      &.has-content + label {
+        transform: translateY(-30px);
+      }
+    }
+  }
+  &__line {
+    background-color: white;
+    height: 0.188rem;
+    margin-top: 0.5rem;
+    + .c-form-group__input {
+      margin-top: 24px;
+    }
+  }
+  &.is-normal {
+    label {
+      color: $primary;
+      left: 0;
+    }
+    .c-form-group__line {
+      background-color: $primary;
+    }
+  }
+  @include mobile-down {
+    & + .c-form-group {
+      margin-top: 20px;
+    }
+  }
+
+  @media (min-width: 600px) {
+    & + .c-form-group {
+      margin-left: 20px;
+    }
+  }
+}
+
+.group-forms {
+  display: flex;
+
+  @include mobile-down {
+    flex-direction: column;
+  }
+}
