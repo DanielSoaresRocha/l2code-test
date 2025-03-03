@@ -1,7 +1,6 @@
 @import "../../../../../sass/abstracts/variables";
 
 $azul-claro: #319bd7;
-$verde-escuro: #2ecc71;
 $laranja: #f39c12;
 
 .filter {
@@ -11,7 +10,7 @@ $laranja: #f39c12;
 }
 
 button {
-  border: 2px solid #2ecc71;
+  border: 2px solid $segundary;
   background: $primary;
   color: white;
   width: 160px;
@@ -19,7 +18,7 @@ button {
   cursor: pointer;
   font-weight: bold;
   &:hover {
-    border: 2px solid #2ecc71;
+    border: 2px solid $segundary;
     background: $primary;
   }
 }

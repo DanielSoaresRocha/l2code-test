@@ -1,3 +1,5 @@
+@import "../abstracts/variables";
+
 input,
 textarea,
 select {
@@ -9,13 +11,13 @@ select {
   /* Foco no input */
   &:focus {
     outline: none;
-    border-color: #2ecc71;
-    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+    border-color: $segundary;
+    box-shadow: 0 0 5px rgba(0, 129, 199, 0.5);
   }
 
   /* Hover nos inputs */
   &:hover {
-    border-color: #2ecc71;
-    box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+    border-color: $segundary;
+    box-shadow: 0 0 5px rgba(0, 129, 199, 0.5);
   }
 }
