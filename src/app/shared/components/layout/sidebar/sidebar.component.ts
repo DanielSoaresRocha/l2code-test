@@ -14,8 +14,9 @@ export class SidebarComponent implements OnInit {
   showSideBar = true;
 
   constructor(private sidebarService: SidebarService, private router: Router) {
-    this.sidebarService.sideBarObserver().subscribe((show) => {
-      this.showSideBar = show;
+    this.sidebarService.sideBarObserver().subscribe((data) => {
+      if (data.showSideBar != undefined) this.showSideBar = data.showSideBar;
+      if (data.activeView != undefined) this.activeView = data.activeView;
     });
   }
 
@@ -29,6 +30,9 @@ export class SidebarComponent implements OnInit {
   }
 
   verifyMobile() {
-    if (window.innerWidth < 1024) this.sidebarService.toggleSideBar(false);
+    if (window.innerWidth < 1024)
+      this.sidebarService.toggleSideBar({
+        showSideBar: false,
+      });
   }
 }

@@ -13,6 +13,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { FormateDatePipe } from '../../../../shared/pipe/formate-date.pipe';
 import { PhoneNumberPipe } from '../../../../shared/pipe/phone-number.pipe';
+import { SidebarService } from '../../../../shared/services/sidebar.service';
 import { Contact } from '../../model';
 import { ContactsService } from '../../services/contacts.service';
 
@@ -38,13 +39,17 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private contactService: ContactsService,
-    private router: Router
+    private router: Router,
+    private sidebarService: SidebarService,
   ) {}
 
   ngOnInit(): void {
     this.getAllContacts();
 
     this.createForm();
+    this.sidebarService.toggleSideBar({
+      activeView: 2,
+    });
   }
 
   getAllContacts() {

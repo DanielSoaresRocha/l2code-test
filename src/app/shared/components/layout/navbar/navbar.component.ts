@@ -13,13 +13,15 @@ export class NavbarComponent implements OnInit {
   constructor(private sidebarService: SidebarService, private router: Router) {}
 
   ngOnInit(): void {
-    this.sidebarService.sideBarObserver().subscribe((show) => {
-      this.showSideBar = show;
+    this.sidebarService.sideBarObserver().subscribe((data) => {
+      if (data.showSideBar != undefined) this.showSideBar = data.showSideBar;
     });
   }
 
   toggleSidebar() {
-    this.sidebarService.toggleSideBar(!this.showSideBar);
+    this.sidebarService.toggleSideBar({
+      showSideBar: !this.showSideBar,
+    });
   }
 
   logOut() {

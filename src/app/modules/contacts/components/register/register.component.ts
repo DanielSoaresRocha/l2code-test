@@ -8,9 +8,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { PhoneNumberPipe } from '../../../../shared/pipe/phone-number.pipe';
+import { SidebarService } from '../../../../shared/services/sidebar.service';
 import { ContactsService } from '../../services/contacts.service';
 
 @Component({
@@ -25,14 +26,18 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private contactsService: ContactsService,
-    private phoneNumberPipe: PhoneNumberPipe,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sidebarService: SidebarService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.createForm();
 
     this.getContactByPhoneNumber();
+    this.sidebarService.toggleSideBar({
+      activeView: 1,
+    });
   }
 
   getContactByPhoneNumber() {
@@ -99,6 +104,10 @@ export class RegisterComponent implements OnInit {
     this.registerForm.reset();
     this.ativo.setValue('S');
     this.favorito.setValue('N');
+  }
+
+  returnToSearch() {
+    this.router.navigate(['contacts/search']);
   }
   get nome() {
     return this.registerForm.controls['nome'];

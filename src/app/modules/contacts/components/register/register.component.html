@@ -52,7 +52,10 @@
       </div>
       @if (id.value.length) {
       <div class="col-6 d-flex justify-content-center">
-        <button (click)="reset()" style="background-color: rgb(202 27 27)">
+        <button
+          (click)="returnToSearch()"
+          style="background-color: rgb(202 27 27)"
+        >
           Cancelar
         </button>
       </div>
