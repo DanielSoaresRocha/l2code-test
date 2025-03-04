@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
@@ -71,7 +72,6 @@ export class RegisterComponent implements OnInit {
   }
 
   save() {
-    debugger;
     if (this.registerForm.invalid) {
       alert('Preencha corretamente o formulário');
       return;
@@ -80,16 +80,19 @@ export class RegisterComponent implements OnInit {
     if (this.id.value) {
       this.contactsService
         .putContato(this.registerForm.getRawValue())
-        .subscribe((response) => {
+        .subscribe(() => {
           alert(`${this.nome.value} foi salvo com sucesso!`);
           this.reset();
         });
     } else {
       this.contactsService
         .postContato(this.registerForm.getRawValue())
-        .subscribe((response) => {
-          alert(`${this.nome.value} foi salvo com sucesso!`);
-          this.reset();
+        .subscribe({
+          next: () => {
+            alert(`${this.nome.value} foi salvo com sucesso!`);
+            this.reset();
+          },
+          error: (e: HttpErrorResponse) => alert(e.error.message),
         });
     }
   }
