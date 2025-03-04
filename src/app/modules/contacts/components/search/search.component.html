@@ -29,7 +29,7 @@
     </div>
     <div class="row mt-2">
       <div class="col-6 col-sm-3 d-flex flex-column">
-        <label>Apenas Favorito:</label>
+        <label>Apenas Favoritos:</label>
         <ui-switch formControlName="favorito"></ui-switch>
       </div>
       <div class="col-6 col-sm-3 d-flex flex-column">
@@ -70,7 +70,7 @@
       </thead>
       <tbody>
         <ng-container *ngFor="let contact of contactsFilter">
-          <tr [ngClass]="{ 'inactive-contact': !contact.ativo }">
+          <tr [ngClass]="{ 'inactive-contact': contact.ativo == 'N' }">
             <td>
               {{ contact.nome }}
             </td>

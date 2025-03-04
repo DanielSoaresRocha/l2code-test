@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
@@ -47,7 +48,7 @@ export class SearchComponent implements OnInit {
   }
 
   getAllContacts() {
-    this.contactService.getContatos().subscribe((response) => {
+    this.contactService.getAll().subscribe((response) => {
       this.contacts = response;
       this.contactsFilter = this.contacts;
     });
@@ -65,14 +66,14 @@ export class SearchComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^\d{11}$/),
       ]),
-      favorito: new FormControl('N'),
-      ativo: new FormControl('N'),
+      favorito: new FormControl(null),
+      ativo: new FormControl(null),
       dateCadastro: new FormControl(null),
     });
   }
 
   deleteContact(contact: Contact) {
-    this.contactService.deleteContato(contact.id).subscribe(() => this.reset());
+    this.contactService.delete(contact.id).subscribe(() => this.reset());
   }
 
   favoriteContact(contact: Contact) {
@@ -81,7 +82,7 @@ export class SearchComponent implements OnInit {
       favorito: contact.favorito == 'S' ? 'N' : 'S',
     };
 
-    this.contactService.putContato(contact).subscribe(() => this.reset());
+    this.contactService.put(contact).subscribe(() => this.reset());
   }
 
   inactiveContact(contact: Contact) {
@@ -90,7 +91,7 @@ export class SearchComponent implements OnInit {
       ativo: contact.ativo == 'S' ? 'N' : 'S',
     };
 
-    this.contactService.putContato(contact).subscribe(() => this.reset());
+    this.contactService.put(contact).subscribe(() => this.reset());
   }
 
   reset() {
@@ -105,35 +106,19 @@ export class SearchComponent implements OnInit {
   }
 
   filter() {
-    this.contactsFilter = this.contacts;
-    const filter: Contact = this.filterForm.getRawValue();
+    let contactFilter: Contact = {
+      ...this.filterForm.getRawValue(),
+      favorito: this.favorito.value == true ? 'S' : null,
+      ativo: this.ativo.value == true ? 'N' : null,
+    };
 
-    if (filter.favorito)
-      this.contactsFilter = this.contactsFilter.filter(
-        (c) => c.favorito == 'S'
-      );
-
-    if (filter.ativo)
-      this.contactsFilter = this.contactsFilter.filter((c) => c.ativo == 'S');
-
-    if (filter.nome)
-      this.contactsFilter = this.contactsFilter.filter((c) =>
-        c.nome.includes(filter.nome)
-      );
-
-    if (filter.email)
-      this.contactsFilter = this.contactsFilter.filter((c) =>
-        c.email.includes(filter.email)
-      );
-
-    if (filter.celular)
-      this.contactsFilter = this.contactsFilter.filter((c) =>
-        c.celular.toString().includes(filter.celular.toString())
-      );
-    if (filter.telefone)
-      this.contactsFilter = this.contactsFilter.filter((c) =>
-        c.telefone.toString().includes(filter.telefone.toString())
-      );
+    this.contactService.getByFilter(contactFilter).subscribe({
+      next: (response) => {
+        this.contacts = response;
+        this.contactsFilter = response;
+      },
+      error: (e: HttpErrorResponse) => alert(e.error.message),
+    });
   }
 
   goToRegister() {

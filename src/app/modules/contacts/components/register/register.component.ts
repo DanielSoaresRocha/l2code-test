@@ -79,21 +79,19 @@ export class RegisterComponent implements OnInit {
 
     if (this.id.value) {
       this.contactsService
-        .putContato(this.registerForm.getRawValue())
+        .put(this.registerForm.getRawValue())
         .subscribe(() => {
           alert(`${this.nome.value} foi salvo com sucesso!`);
           this.reset();
         });
     } else {
-      this.contactsService
-        .postContato(this.registerForm.getRawValue())
-        .subscribe({
-          next: () => {
-            alert(`${this.nome.value} foi salvo com sucesso!`);
-            this.reset();
-          },
-          error: (e: HttpErrorResponse) => alert(e.error.message),
-        });
+      this.contactsService.post(this.registerForm.getRawValue()).subscribe({
+        next: () => {
+          alert(`${this.nome.value} foi salvo com sucesso!`);
+          this.reset();
+        },
+        error: (e: HttpErrorResponse) => alert(e.error.message),
+      });
     }
   }
 
