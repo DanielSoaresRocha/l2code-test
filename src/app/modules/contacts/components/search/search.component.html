@@ -83,9 +83,9 @@
                 class="las la-edit"
                 style="color: blue"
                 title="Editar"
-                (click)="updateContact(contact.celular)"
+                (click)="updateContact(contact.id)"
               ></i>
-              @if(contact.favorito){
+              @if(contact.favorito == 'S'){
               <i
                 class="las la-star"
                 (click)="favoriteContact(contact)"
@@ -99,7 +99,7 @@
                 style="color: #bebe25"
                 title="Favoritar"
               ></i>
-              } @if(contact.ativo){
+              } @if(contact.ativo == 'S'){
               <i
                 class="las la-stop-circle"
                 style="color: orange"

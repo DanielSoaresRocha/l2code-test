@@ -41,9 +41,16 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.contacts = this.contactService.getData();
-    this.contactsFilter = this.contactService.getData();
+    this.getAllContacts();
+
     this.createForm();
+  }
+
+  getAllContacts() {
+    this.contactService.getContatos().subscribe((response) => {
+      this.contacts = response;
+      this.contactsFilter = this.contacts;
+    });
   }
 
   createForm() {
@@ -58,46 +65,42 @@ export class SearchComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^\d{11}$/),
       ]),
-      favorito: new FormControl(false),
-      ativo: new FormControl(false),
+      favorito: new FormControl('N'),
+      ativo: new FormControl('N'),
       dateCadastro: new FormControl(null),
     });
   }
 
   deleteContact(contact: Contact) {
-    this.contactService.delete(contact);
-    this.contacts = this.contactService.getData();
+    this.contactService.deleteContato(contact.id).subscribe(() => this.reset());
   }
 
   favoriteContact(contact: Contact) {
     contact = {
       ...contact,
-      favorito: !contact.favorito,
+      favorito: contact.favorito == 'S' ? 'N' : 'S',
     };
 
-    this.contactService.update(contact);
-    this.reset();
+    this.contactService.putContato(contact).subscribe(() => this.reset());
   }
 
   inactiveContact(contact: Contact) {
     contact = {
       ...contact,
-      ativo: !contact.ativo,
+      ativo: contact.ativo == 'S' ? 'N' : 'S',
     };
 
-    this.contactService.update(contact);
-    this.reset();
+    this.contactService.putContato(contact).subscribe(() => this.reset());
   }
 
   reset() {
-    this.contacts = this.contactService.getData();
-    this.contactsFilter = this.contactService.getData();
+    this.getAllContacts();
     this.filterForm.reset();
   }
 
-  updateContact(phoneNumber: number) {
+  updateContact(id: number) {
     this.router.navigate(['contacts/register'], {
-      queryParams: { phoneNumber: phoneNumber },
+      queryParams: { id: id },
     });
   }
 
@@ -107,11 +110,11 @@ export class SearchComponent implements OnInit {
 
     if (filter.favorito)
       this.contactsFilter = this.contactsFilter.filter(
-        (c) => c.favorito == true
+        (c) => c.favorito == 'S'
       );
 
     if (filter.ativo)
-      this.contactsFilter = this.contactsFilter.filter((c) => c.ativo == false);
+      this.contactsFilter = this.contactsFilter.filter((c) => c.ativo == 'S');
 
     if (filter.nome)
       this.contactsFilter = this.contactsFilter.filter((c) =>

@@ -21,43 +21,40 @@ import { ContactsService } from '../../services/contacts.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
-  phoneNumber = '';
 
   constructor(
     private contactsService: ContactsService,
     private phoneNumberPipe: PhoneNumberPipe,
     private route: ActivatedRoute
-  ) {
-    const number = this.route.snapshot.queryParamMap.get('phoneNumber');
-    this.phoneNumber = number ? number : '';
-    console.log('Query Param:', this.phoneNumber);
-  }
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
-    if (this.phoneNumber) {
-      this.getContactByPhoneNumber(Number(this.phoneNumber));
-    }
+
+    this.getContactByPhoneNumber();
   }
 
-  getContactByPhoneNumber(phoneNumber: number) {
-    let contact = this.contactsService
-      .getData()
-      .find((c) => c.celular == phoneNumber);
+  getContactByPhoneNumber() {
+    const number = this.route.snapshot.queryParamMap.get('id');
+    this.id.setValue(number ? number : '');
 
-    if (!contact) return;
+    if (!number) return;
 
-    this.nome.setValue(contact.nome);
-    this.email.setValue(contact.email);
-    this.celular.setValue(contact.celular);
-    this.telefone.setValue(contact.telefone);
-    this.dateCadastro.setValue(contact.dateCadastro);
-    this.favorito.setValue(contact.favorito);
-    this.ativo.setValue(contact.ativo);
+    this.contactsService.getById(Number(number)).subscribe((response) => {
+      if (!response) return;
+
+      this.nome.setValue(response.nome);
+      this.email.setValue(response.email);
+      this.celular.setValue(response.celular);
+      this.telefone.setValue(response.telefone);
+      this.favorito.setValue(response.favorito);
+      this.ativo.setValue(response.ativo);
+    });
   }
 
   createForm() {
     this.registerForm = new FormGroup({
+      id: new FormControl(null),
       nome: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required]),
       celular: new FormControl(null, [
@@ -66,50 +63,41 @@ export class RegisterComponent implements OnInit {
       ]),
       telefone: new FormControl(null, [
         Validators.required,
-        Validators.pattern(/^\d{11}$/),
+        Validators.pattern(/^\d{10}$/),
       ]),
-      favorito: new FormControl(false),
-      ativo: new FormControl(true),
-      dateCadastro: new FormControl(null),
+      favorito: new FormControl('N'),
+      ativo: new FormControl('S'),
     });
   }
 
   save() {
+    debugger;
     if (this.registerForm.invalid) {
       alert('Preencha corretamente o formulário');
       return;
     }
 
-    if (
-      !this.phoneNumber &&
+    if (this.id.value) {
       this.contactsService
-        .getData()
-        .find((contact) => contact.celular == this.celular.value)
-    ) {
-      alert(
-        `O número de celular ${this.phoneNumberPipe.transform(
-          this.celular.value
-        )} já foi adicionado.`
-      );
-      return;
-    }
-
-    if (this.phoneNumber) {
-      this.contactsService.update(this.registerForm.getRawValue());
+        .putContato(this.registerForm.getRawValue())
+        .subscribe((response) => {
+          alert(`${this.nome.value} foi salvo com sucesso!`);
+          this.reset();
+        });
     } else {
-      this.dateCadastro.setValue(new Date());
-      this.contactsService.save(this.registerForm.getRawValue());
+      this.contactsService
+        .postContato(this.registerForm.getRawValue())
+        .subscribe((response) => {
+          alert(`${this.nome.value} foi salvo com sucesso!`);
+          this.reset();
+        });
     }
-    alert(`${this.nome.value} foi salvo com sucesso!`);
-
-    this.reset();
   }
 
   reset() {
     this.registerForm.reset();
-    this.ativo.setValue(true);
-    this.favorito.setValue(false);
-    this.phoneNumber = '';
+    this.ativo.setValue('S');
+    this.favorito.setValue('N');
   }
   get nome() {
     return this.registerForm.controls['nome'];
@@ -123,13 +111,13 @@ export class RegisterComponent implements OnInit {
   get telefone() {
     return this.registerForm.controls['telefone'];
   }
-  get dateCadastro() {
-    return this.registerForm.controls['dateCadastro'];
-  }
   get ativo() {
     return this.registerForm.controls['ativo'];
   }
   get favorito() {
     return this.registerForm.controls['favorito'];
+  }
+  get id() {
+    return this.registerForm.controls['id'];
   }
 }
