@@ -1,124 +1,124 @@
-# Sistema de Agendamento Telefônico
+# Telephone Scheduling System
 
-## Visão Geral
+## Overview
 
-Este projeto é uma implementação de um sistema de agendamento telefônico desenvolvido em **Angular**. O objetivo principal é permitir o cadastro, consulta, edição e inativação de contatos, além de possibilitar a marcação de contatos favoritos. O projeto foi estruturado de forma organizada, utilizando boas práticas de desenvolvimento e garantindo segurança nas rotas por meio de **Guards**.
+This project is an implementation of a telephone scheduling system developed in **Angular**. The main objective is to allow the registration, consultation, editing, and deactivation of contacts, as well as enabling the marking of favorite contacts. The project is structured in an organized manner, following best development practices and ensuring route security through **Guards**.
 
 <p align="center">
   <img src="public/assets/readme/img1.png" width="90%" float="center" style="border-radius: 8px"/>
 </p>
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- **Angular 19.2.0** (versão mais recente)
+- **Angular 19.2.0** (latest version)
 - **TypeScript**
-- **Bootstrap 5.3.3** (para estilização e responsividade)
-- **ngx-ui-switch 15.0.0** (para componente switch - Implementação de contatos Favoritos e Ativos)
-- **ngx-mask 19.0.6** (para máscaras)
-- **Angular Router** (para navegação entre páginas)
-- **Guards** (para proteção de rotas)
-- **Angular Testing (Jasmine/Karma)** (para testes unitários)
+- **Bootstrap 5.3.3** (for styling and responsiveness)
+- **ngx-ui-switch 15.0.0** (for switch component - Implementation of Favorite and Active contacts)
+- **ngx-mask 19.0.6** (for input masks)
+- **Angular Router** (for page navigation)
+- **Guards** (for route protection)
+- **Angular Testing (Jasmine/Karma)** (for unit testing)
 
-## Funcionalidades
+## Features
 
-### 1. Tela de Cadastro de Contatos
+### 1. Contact Registration Screen
 
-- Formulário para cadastrar um novo contato.
-- Validação para verificar se o número de celular já foi cadastrado.
-- Mensagens de erro e feedback para o usuário.
+- Form to register a new contact.
+- Validation to check if the phone number has already been registered.
+- Error messages and user feedback.
 
 <p align="center">
   <img src="public/assets/readme/img2.png" width="90%" float="center" style="border-radius: 8px"/>
 </p>
 
-### 2. Tela de Consulta de Contatos
+### 2. Contact Consultation Screen
 
-- Campo de busca para encontrar contatos rapidamente.
-- Exibição da lista de contatos cadastrados.
-- Indicação visual para contatos favoritos.
+- Search field to quickly find contacts.
+- Display of the list of registered contacts.
+- Visual indication for favorite contacts.
 
 <p align="center">
   <img src="public/assets/readme/img3.png" width="90%" float="center" style="border-radius: 8px"/>
 </p>
 
-### 3. Atualização e Inativação de Contatos
+### 3. Contact Update and Deactivation
 
-- Possibilidade de editar informações de um contato existente.
-- Opção para inativar contatos, impedindo sua utilização sem excluí-los permanentemente.
-- Filtro para exibir ou ocultar contatos inativos.
+- Ability to edit an existing contact's information.
+- Option to deactivate contacts, preventing their use without permanently deleting them.
+- Filter to display or hide inactive contacts.
 
-### 4. Favoritos
+### 4. Favorites
 
-- Opção para marcar/desmarcar um contato como favorito.
-- Destaque visual para contatos favoritos.
+- Option to mark/unmark a contact as a favorite.
+- Visual highlight for favorite contacts.
 
 <p align="center">
   <img src="public/assets/readme/img5.png" width="90%" float="center" style="border-radius: 8px"/>
 </p>
 
-## Estrutura do Projeto
+## Project Structure
 
-O projeto segue uma estrutura modular para facilitar a manutenção e escalabilidade:
+The project follows a modular structure to facilitate maintenance and scalability:
 
 ```
 ├── src
 │   ├── app
 │   │   ├── modules
-│   │   │   ├── contacts (módulo de contatos)
-│   │   │   ├── login (módulo de autenticação)
+│   │   │   ├── contacts (contacts module)
+│   │   │   ├── login (authentication module)
 │   │   ├── app-route.ts
 │   │   ├── app.component.ts
-│   |   ├── shared (recursos reutilizáveis)
-│   ├── environments (configuração de ambientes)
+│   │   ├── shared (reusable resources)
+│   ├── environments (environment configuration)
 ```
 
-## Proteção de Rotas
+## Route Protection
 
-- Implementação de **Guards** para restringir acesso a determinadas páginas.
-- Utilização de **AuthGuard** para verificar permissões antes da navegação.
+- Implementation of **Guards** to restrict access to certain pages.
+- Use of **AuthGuard** to check permissions before navigation.
 
-## Testes Unitários
+## Unit Testing
 
-Foram implementados testes unitários com **Jasmine e Karma**.
+Unit tests have been implemented using **Jasmine and Karma**.
 
 <p align="center">
   <img src="public/assets/readme/img4.png" width="90%" float="center" style="border-radius: 8px"/>
 </p>
 
-## Como Executar o Projeto
+## How to Run the Project
 
-### 1. Clonar o Repositório
+### 1. Clone the Repository
 
 ```
 git clone https://github.com/DanielSoaresRocha/l2code-test.git
 cd telephone-scheduling
 ```
 
-### 2. Instalar Dependências
+### 2. Install Dependencies
 
 ```
 npm install
 ```
 
-### 3. Executar o Servidor
+### 3. Run the Server
 
 ```
 npm run start
 ```
 
-A aplicação estará disponível em `http://localhost:4200/`.
+The application will be available at `http://localhost:4200/`.
 
-### 4. Rodar Testes Unitários
+### 4. Run Unit Tests
 
 ```
 npm test
 ```
 
-## Considerações Finais
+## Final Considerations
 
-Este projeto foi desenvolvido seguindo boas práticas de desenvolvimento, garantindo um código limpo, organizado e seguro. A implementação de testes unitários reforça a confiabilidade do sistema, e a utilização de **Guards** assegura a proteção das rotas.
+This project was developed following best development practices, ensuring clean, organized, and secure code. The implementation of unit tests reinforces the reliability of the system, and the use of **Guards** ensures route protection.
 
-Para sugestões, melhorias ou colaboração no projeto, fique à vontade para abrir um Pull Request ou entrar em contato.
+For suggestions, improvements, or contributions to the project, feel free to open a Pull Request or get in touch.
 
 ---
 
@@ -126,7 +126,7 @@ Para sugestões, melhorias ou colaboração no projeto, fique à vontade para ab
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT) - see the [LICENSE](LICENSE) file for details.
 
-## Autor
+## Author
 
 <table>
   <tr>
